@@ -81,7 +81,11 @@ async function main() {
     }
 
     stdout.write('Watching for changes...\n');
-    setInterval(watchDirectory, 1000);
+
+    await watchDirectory();
+    setInterval(async () => {
+      await watchDirectory();
+    }, 1000);
   } catch (err) {
     console.error('Error during operations:', err);
   }
