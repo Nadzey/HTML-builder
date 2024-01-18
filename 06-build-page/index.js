@@ -34,6 +34,7 @@ async function copyDir(src, dest) {
         await copyDir(srcPath, destPath);
       } else {
         await fs.copyFile(srcPath, destPath);
+        stdout.write('Files copied: ' + destPath + '\n')
       }
     }
   } catch (err) {
@@ -82,7 +83,7 @@ async function buildHtmlFromTemplate() {
     }
 
     await fs.writeFile(distHtmlPath, template);
-    stdout.write('index.html created from template.html\n');
+    stdout.write('index.html created from template.html with the replacement of template tags from the components\n');
   } catch (err) {
     console.error('Error creating HTML from template:', err);
   }
@@ -128,8 +129,9 @@ async function main() {
     await copyDir(assetsPath, distAssetsPath);
     await buildHtmlFromTemplate();
     await watchForChanges();
+    stdout.write('For exit from watching mode press Ctrl+C\n');
     stdout.write(
-      'Build process and watching for changes started successfully\n',
+      'Build process completed and watching for changes......\n',
     );
   } catch (err) {
     console.error('Error in main function:', err);

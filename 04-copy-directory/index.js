@@ -79,7 +79,7 @@ async function main() {
     } else {
       stdout.write('Directory already exists, no need to copy\n');
     }
-
+    stdout.write('If you want cansel watching press Ctrl+C\n');
     stdout.write('Watching for changes...\n');
 
     await watchDirectory();
